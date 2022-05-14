@@ -1,4 +1,4 @@
-name: 'Publish Unit Test Results'
+name: 'Publish Unit Test Results from behind a firewall'
 author: 'EnricoMi'
 description: 'A GitHub Action that publishes unit test results on GitHub'
 inputs:
@@ -91,9 +91,13 @@ inputs:
   json_file:
     description: 'Results are written to this JSON file.'
     required: false
+  image_registry:
+    description: 'Image registry where enricomi/publish-unit-test-result-action image will be pulled from'
+    default: 'ghcr.io'
+    required: false
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/enricomi/publish-unit-test-result-action:v1.34'
+  image: docker://${{ inputs.image_registry }}/enricomi/publish-unit-test-result-action:v1.34
 branding:
   icon: 'check-circle'
   color: 'green'
